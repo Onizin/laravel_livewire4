@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Counter;
+ 
+Route::get('/counter', Counter::class);
 
-Route::livewire('/', 'pages::posts.index')->name('posts.index');
-Route::livewire('/create', 'pages::posts.create')->name('posts.create');
-Route::livewire('/edit/{id}', 'pages::posts.edit')->name('posts.edit');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+
