@@ -5,14 +5,14 @@
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1><i class="fas fa-user mr-2"></i>
-                @yield('title')
+                {{ $title}}
               </h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#"><i class="fas fa-home mr-1"></i>Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">@yield('title')</li>
+                <li class="breadcrumb-item active">{{ $title}}</li>
               </ol>
             </div>
           </div>
@@ -24,7 +24,9 @@
         <div class="card-header">
           <div class="d-flex justify-content-between">
             <div>
-              <button class="btn btn-sm btn-primary"><i class="fas fa-plus mr-1"></i>Tambah Data</button>
+              <button wire:click="create" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">
+                  <i class="fas fa-plus mr-1"></i>Tambah Data
+              </button>
             </div>
             <div class="btn-group dropleft">
               <button type="button" class="btn btn-sn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,7 +42,7 @@
         
         </div>
         <div class="card-body">
-          <div class="mb-3">
+          <div class="mb-3 d-flex justify-content-between">
             <div class="col-2">
               <select wire:model.change="paginate" class="form-control">
                 <option value="10">10</option>
@@ -48,6 +50,9 @@
                 <option value="50">50</option>
                 <option value="100">100</option>
               </select>
+            </div>
+            <div class="col-6">
+              <input wire:model.live="search" class="form-control" placeholder="Cari user...">
             </div>
           </div>
           <div class="table-responsive">
@@ -65,7 +70,7 @@
                   @foreach($user as $item)
                     <tr>
                       <td>{{ $loop->iteration}}</td>
-                      <td>{{ $item->nama}}</td>
+                      <td>{{ $item->name}}</td>
                       <td>{{ $item->email}}</td>
                       @if($item->role == 'Super Admin')
                       <td>
@@ -91,5 +96,19 @@
       </div>
 
     </section>
+    @include('livewire.superadmin.user.create')
+
+    @script 
+      <script>
+        $wire.on('closeCreateModal',()=>{
+          $('#createModal').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Disimpan",
+            icon:"success",
+          });
+        });
+      </script>
+    @endscript
   </div>
 </div>
