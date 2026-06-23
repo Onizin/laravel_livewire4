@@ -11,7 +11,7 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
     public int $paginate = 10;
     public $search = '';
-    public $name, $email, $password,$password_confirmation, $role;
+    public $name, $email, $password,$password_confirmation, $role, $user_id;
 
     public function render()
     {
@@ -57,5 +57,58 @@ class Index extends Component
     public function create(){
         $this->resetValidation();
         $this->reset(['name','email','password','password_confirmation','role']);
+    }
+
+    public function edit($id){
+        $this->resetValidation();
+        $user = User::findOrFail($id);
+        $this->name = $user->name;
+        $this->email= $user->email;
+        $this->role = $user->role;
+        $this->user_id = $user->id;
+        $this->password = '';
+        $this->password_confirmation = '';
+    }
+
+    public function update($id){
+        $user = User::findOrFail($id);
+        $this->validate([
+            'name'=>'required',
+            'email'=>'required|email|unique:users,email,'.$user->id,
+            'role'=>'required',
+            'password'=>'nullable|confirmed|min:6',
+        ],
+        [
+            'name.required'=>'Nama user wajib diisi',
+            'email.required'=>'Email user wajib diisi',
+            'email.email'=>'Email tidak valid',
+            'email.unique'=>'Email sudah digunakan',
+            'role.required'=>'Role user wajib diisi',
+            'password.min'=>'Password minimal 6 karakter',
+            'password.confirmed'=>'Password konfirmasi tidak sama',
+        ]);
+
+        $user->name = $this->name;
+        $user->email = $this->email;
+        $user->role = $this->role;
+        if($this->password){
+            $user->password = bcrypt($this->password);
+        }
+        $user->save();
+        $this->dispatch('closeEditModal');
+    }
+
+    public function confirm($id){
+        $user = User::findOrFail($id);
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->role = $user->role;
+        $this->user_id = $user->id;
+    }
+
+    public function destroy($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+        $this->dispatch('closeDeleteModal');
     }
 }

@@ -34,8 +34,8 @@
                 Cetak
               </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item text-success" href="#"><i class="fas fa-file-excel mr-1"></i>Excel</a>
-              <a class="dropdown-item text-danger" href="#"><i class="fas fa-file-pdf mr-1"></i>PDF</a>
+              <a class="dropdown-item text-success" href="{{ route('superadmin.user.export.excel') }}"><i class="fas fa-file-excel mr-1"></i>Excel</a>
+              <a class="dropdown-item text-danger" href="{{ route('superadmin.user.export.pdf') }}"><i class="fas fa-file-pdf mr-1"></i>PDF</a>
             </div>
           </div>
         </div>
@@ -82,8 +82,11 @@
                       </td>
                       @endif
                       <td>
-                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editModal">
+                          <i class="fas fa-edit mr-1"></i>
+                        </button>
+                        <button wire:click="confirm({{$item->id}})" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash"></i></button>
                       </td>
                     </tr>
                   @endforeach
@@ -94,10 +97,14 @@
         </div>
 
       </div>
-
     </section>
+
     @include('livewire.superadmin.user.create')
 
+    @include('livewire.superadmin.user.edit')
+
+    @include('livewire.superadmin.user.delete')
+    
     @script 
       <script>
         $wire.on('closeCreateModal',()=>{
@@ -105,6 +112,24 @@
           Swal.fire({
             title:"Berhasil",
             text:"Data Berhasil Disimpan",
+            icon:"success",
+          });
+        });
+ 
+        $wire.on('closeEditModal',()=>{
+          $('#editModal').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Diupdate",
+            icon:"success",
+          });
+        });
+
+        $wire.on('closeDeleteModal',()=>{
+          $('#deleteModal').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Dihapus",
             icon:"success",
           });
         });
