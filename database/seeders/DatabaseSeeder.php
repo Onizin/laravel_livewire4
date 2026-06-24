@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        //kategori
         $kategoris = [
             ['nama' => 'Elektronik', 'deskripsi' => 'Produk elektronik'],
             ['nama' => 'Makanan',    'deskripsi' => 'Produk makanan'],
