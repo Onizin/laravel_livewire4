@@ -15,7 +15,9 @@ class Index extends Component
 
     public function render()
     {
-        
-        return view('livewire.superadmin.kategori.index');
+        $data = array(
+            'title'=>'Data Kategori',
+        );
+        return view('livewire.superadmin.kategori.index',$data);
     }
 }
