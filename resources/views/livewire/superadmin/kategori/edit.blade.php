@@ -9,45 +9,19 @@
       </div>
       <div class="modal-body">
         <div class="row">
-            <label for="name" class="form-label">Name</label>
+            <label for="nama" class="form-label">Nama</label>
             <span class="text-danger">*</span>
-            <input wire:model="name" type="text" class="form-control" placeholder="Nama user">
-            @error('name')
+            <input wire:model="nama" type="text" class="form-control" placeholder="Nama Kategori">
+            @error('nama')
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
         <div class="row mt-2">
-            <label for="email" class="form-label">Email</label>
+            <label for="deskripsi" class="form-label">Deskripsi</label>
             <span class="text-danger">*</span>
-            <input wire:model="email" type="email" class="form-control" placeholder="Email user">
+            <input wire:model="deskripsi" type="text" class="form-control" placeholder="Deskripsi Kategori">
 
-            @error('email')
-                <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="row mt-2">
-            <label for="role" class="form-label">Role</label>
-            <span class="text-danger">*</span>
-            <select wire:model="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                <option selected disabled>--Pilih Role--</option>
-                <option value="Super Admin">Super Admin</option>
-                <option value="Admin">Admin</option>
-            </select>
-            @error('role')
-                <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="row mt-2">
-            <label for="password" class="form-label">Password</label>
-            <input wire:model="password" type="password" class="form-control" placeholder="Password user">
-            @error('password')
-                <small class="text-danger">{{$message}}</small>
-            @enderror
-        </div>
-        <div class="row mt-2">
-            <label for="password_confirmation" class="form-label">Password Komfirmasi</label>
-            <input wire:model="password_confirmation" type="password" class="form-control" placeholder="Password Confirmation">
-            @error('password_confirmation')
+            @error('deskripsi')
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
