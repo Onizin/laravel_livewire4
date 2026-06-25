@@ -27,4 +27,12 @@ class UserExportController extends Controller
 
         return $pdf->download('data-user-' . now()->format('d-m-Y') . '.pdf');
     }
+
+    public function excelKategori(){
+        
+    }
+    
+    public function pdfKategori(){
+
+    }
 }
