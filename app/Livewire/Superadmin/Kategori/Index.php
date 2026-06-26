@@ -26,4 +26,62 @@ class Index extends Component
         );
         return view('livewire.superadmin.kategori.index',$data);
     }
+
+    public function store(){
+        $this->validate([
+            'nama'=>'required|unique:kategoris,nama',
+            'deskripsi'=>'required',
+        ],
+        [
+            'nama.required'=>'Nama kategori wajib diisi',
+            'nama.unique'=>'Nama kategori sudah digunakan',
+            'deskripsi.required'=>'Deskripsi kategori wajib diisi',
+        ]);
+        $kategori = new Kategori();
+        $kategori->nama= $this->nama;
+        $kategori->deskripsi = $this->deskripsi;
+        $kategori->save();
+        $this->dispatch('closeCreateModalKategori');
+    }
+
+    public function create(){
+        $this->resetValidation();
+        $this->reset(['nama','deskripsi']);
+    }
+
+    public function edit($id){
+        $this->resetValidation();
+        $kategori = Kategori::findOrFail($id);
+        $this->nama = $kategori->nama;
+        $this->deskripsi = $kategori->deskripsi;
+    }
+
+    public function update($id){
+        $kategori = Kategori::findOrFail($id);
+        $this->validate([
+            'nama'=>'required|unique:kategoris,nama',
+            'deskripsi'=>'required',
+        ],
+        [
+            'nama.required'=>'Nama kategori wajib diisi',
+            'nama.unique'=>'Nama kategori sudah digunakan',
+            'deskripsi.required'=>'Deskripsi kategori wajib diisi',
+        ]);
+        $kategori->nama = $this->nama;
+        $kategori->deskripsi = $this->deskripsi;
+        $kategori->save();
+        $this->dispatch('closeEditModalKategori');
+    }
+
+    public function deleteConfirm($id){
+        $kategori = Kategori::findOrFail($id);
+        $this->nama = $kategori->nama;
+        $this->deskripsi = $kategori->deskripsi;
+    }
+
+    public function delete($id){
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+        $this->dispatch('closeDeleteModalKategori');
+    }
 }
