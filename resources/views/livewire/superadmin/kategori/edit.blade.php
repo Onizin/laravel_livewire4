@@ -25,7 +25,7 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
-    </div>   
+      </div>   
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times mr-1"></i>Close</button>
         <button type="button" class="btn btn-warning" wire:click="update({{$kategori_id}})"><i class="fas fa-save mr-1"></i>Update</button>

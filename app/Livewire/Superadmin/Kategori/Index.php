@@ -39,6 +39,7 @@ class Index extends Component
         $kategori = new Kategori();
         $kategori->nama= $this->nama;
         $kategori->deskripsi = $this->deskripsi;
+        $kategori->slug = \Str::slug($this->nama);
         $kategori->save();
         $this->dispatch('closeCreateModalKategori');
     }
@@ -48,15 +49,16 @@ class Index extends Component
         $this->reset(['nama','deskripsi']);
     }
 
-    public function edit($id){
+    public function edit($ids){
         $this->resetValidation();
-        $kategori = Kategori::findOrFail($id);
+        $kategori = Kategori::findOrFail($ids);
         $this->nama = $kategori->nama;
         $this->deskripsi = $kategori->deskripsi;
+        $this->kategori_id = $kategori->id;
     }
 
-    public function update($id){
-        $kategori = Kategori::findOrFail($id);
+    public function update($ids){
+        $kategori = Kategori::findOrFail($ids);
         $this->validate([
             'nama'=>'required|unique:kategoris,nama',
             'deskripsi'=>'required',
@@ -68,6 +70,7 @@ class Index extends Component
         ]);
         $kategori->nama = $this->nama;
         $kategori->deskripsi = $this->deskripsi;
+        $kategori->slug = \Str::slug($this->nama);
         $kategori->save();
         $this->dispatch('closeEditModalKategori');
     }

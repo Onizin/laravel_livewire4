@@ -75,7 +75,7 @@
                         <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editModalKategori">
                           <i class="fas fa-edit mr-1"></i>
                         </button>
-                        <button wire:click="confirm({{$item->id}})" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModalKategori">
+                        <button wire:click="deleteConfirm({{$item->id}})" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModalKategori">
                           <i class="fas fa-trash"></i>
                         </button>
                       </td>
@@ -93,6 +93,35 @@
     @include('livewire.superadmin.kategori.create')
     @include('livewire.superadmin.kategori.edit')
     @include('livewire.superadmin.kategori.delete')
+    @script
+      <script>
+        $wire.on('closeCreateModalKategori',()=>{
+          $('#createModalKategori').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Disimpan",
+            icon:"success",
+          });
+        });
+ 
+        $wire.on('closeEditModalKategori',()=>{
+          $('#editModalKategori').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Diupdate",
+            icon:"success",
+          });
+        });
 
+        $wire.on('closeDeleteModalKategori',()=>{
+          $('#deleteModalKategori').modal('hide');
+          Swal.fire({
+            title:"Berhasil",
+            text:"Data Berhasil Dihapus",
+            icon:"success",
+          });
+        });
+      </script>
+    @endscript
   </div>
 </div>
