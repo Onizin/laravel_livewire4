@@ -15,7 +15,6 @@ class Index extends Component
     public $search = '';
     public $nama,$deskripsi,$kategori_id;
 
-
     public function render()
     {
         $data = array(
