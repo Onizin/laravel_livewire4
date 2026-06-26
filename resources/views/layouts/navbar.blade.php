@@ -13,7 +13,7 @@
       <li class="nav-item dropdown user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
           <img src="{{ asset('Adminlte3/dist/img/user2-160x160.jpg')}}" class="user-image img-circle" alt="User Image">
-          <span class="d-none d-md-inline">Alexander Pierce</span>
+          <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
@@ -21,16 +21,21 @@
             <img src="{{ asset('Adminlte3/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
             <p>
-              kiki IT
+              {{ auth()->user()->name }}
               <div>
-                <span class="badge badge-success">Admin<span>
+                <span class="badge badge-success">{{ auth()->user()->role }}</span>
               </div>
             </p>
           </li>
  
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="#" class="btn btn-sm btn-danger float-right"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="btn btn-sm btn-danger float-right">
+                <i class="fas fa-sign-out-alt"></i> Sign out
+              </button>
+            </form>
           </li>
         </ul>
       </li>
