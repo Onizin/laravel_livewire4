@@ -27,7 +27,8 @@ class Index extends Component
                     ->orwhere('satuan','like','%'.$this->search.'%')
                     ->orwhere('kode','like','%'.$this->search.'%')
                     ->paginate($this->paginate),
-        )
+            'kategori'=>Kategori::all(),
+        );
         return view('livewire.superadmin.barang.index',$data);
     }
     

@@ -16,3 +16,6 @@ Route::get('superadmin/user/export/pdf',   [UserExportController::class, 'pdf'])
 
 Route::get('superadmin/kategori/export/excel', [UserExportController::class, 'excelKategori'])->name('superadmin.kategori.export.excel');
 Route::get('superadmin/kategori/export/pdf',   [UserExportController::class, 'pdfKategori'])->name('superadmin.kategori.export.pdf');
+
+Route::get('superadmin/barang/export/excel', [UserExportController::class, 'excelbarang'])->name('superadmin.barang.export.excel');
+Route::get('superadmin/barang/export/pdf',   [UserExportController::class, 'pdfbarang'])->name('superadmin.barang.export.pdf');
