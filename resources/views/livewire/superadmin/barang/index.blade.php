@@ -81,10 +81,10 @@
                       <td>{{ $item->harga}}</td>
                       <td>{{ $item->satuan}}</td>
                       <td>
-                        <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editModalKategori">
+                        <button wire:click="edit({{$item->id}})" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editModalBarang">
                           <i class="fas fa-edit mr-1"></i>
                         </button>
-                        <button wire:click="deleteConfirm({{$item->id}})" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModalKategori">
+                        <button wire:click="deleteConfirm({{$item->id}})" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModalBarang">
                           <i class="fas fa-trash"></i>
                         </button>
                       </td>

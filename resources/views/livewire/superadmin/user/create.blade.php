@@ -29,7 +29,7 @@
             <label for="role" class="form-label">Role</label>
             <span class="text-danger">*</span>
             <select wire:model="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                <option selected disabled>--Pilih Role--</option>
+                <option value="" selected disabled>--Pilih Role--</option>
                 <option value="Super Admin">Super Admin</option>
                 <option value="Admin">Admin</option>
             </select>
